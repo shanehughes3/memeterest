@@ -2,6 +2,30 @@ const express = require("express");
 
 const router = express.Router();
 
+/*
+ * MAIN
+ */
+
+router.get("/", (req, res) => {
+	
+});
+
+/*
+ * AUTH
+ */
+
+router.get("/auth/login", (req, res) => {
+	passport.authenticate("twitter");
+});
+
+router.get("/auth/return", (req, res) => {
+	
+});
+
+/*
+ * MEME API
+ */
+
 router.get("/api/all", (req, res) => {
 	// get all memes
 });
