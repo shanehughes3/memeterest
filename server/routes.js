@@ -1,6 +1,7 @@
 
 const express = require("express")
 const path = require("path");
+const passport = require("passport");
 
 
 const router = express.Router();
@@ -9,12 +10,14 @@ const router = express.Router();
  * AUTH
  */
 
-router.get("/auth/login", (req, res) => {
-	passport.authenticate("twitter");
-});
+router.get("/auth/login", passport.authenticate("twitter"));
 
 router.get("/auth/return", (req, res) => {
-
+	passport.authenticate("twitter",
+	{ failureRedirect: "/auth/login" },
+	(req, res) => {
+		res.redirect("/");
+	})
 });
 
 /*

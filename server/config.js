@@ -13,13 +13,15 @@ module.exports = {
 		twitterConsumerKey: configHelpers.consumerKey,
 		twitterConsumerSecret: configHelpers.consumerSecret,
 		twitterCallback: "http://localhost:8080/auth/return",
-		db: configHelpers.db
+		db: configHelpers.db,
+		sessionSecret: "cats"
 	},
 	production: {
 		port: process.env.PORT,
 		twitterConsumerKey: process.env.TWITTER_CONSUMER_KEY,
 		twitterConsumerSecret: process.env.TWITTER_CONSUMER_SECRET,
 		twitterCallback: "https://memeterest.shanehughes.io/auth/return",
-		db: process.env.MONGO_URI
+		db: process.env.MONGO_URI,
+		sessionSecret: process.env.SESSION_SECRET
 	}
 };
