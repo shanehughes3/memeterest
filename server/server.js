@@ -12,9 +12,9 @@ passport.use(new TwitterStrategy({
 	callbackURL: config.twitterCallback
 }, function(token, tokenSecret, profile, done) {
 
-});
+}));
 
+app.use(express.static("public"));
 app.use(routes);
 
 app.listen(config.port);
-

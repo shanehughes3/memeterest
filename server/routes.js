@@ -1,14 +1,9 @@
-const express = require("express");
+
+const express = require("express")
+const path = require("path");
+
 
 const router = express.Router();
-
-/*
- * MAIN
- */
-
-router.get("/", (req, res) => {
-	
-});
 
 /*
  * AUTH
@@ -19,7 +14,7 @@ router.get("/auth/login", (req, res) => {
 });
 
 router.get("/auth/return", (req, res) => {
-	
+
 });
 
 /*
@@ -45,3 +40,13 @@ router.put("/api/:userId/:memeId", (req, res) => {
 router.delete("/api/:userId/:memeId", (req, res) => {
 	// delete meme
 });
+
+/*
+ * MAIN
+ */
+
+router.get("/*", (req, res) => {
+	res.sendFile(path.join(__dirname + "/../public/index.html"));
+});
+
+module.exports = router;

@@ -1,7 +1,8 @@
+let twitterKeys = {};
 if (process.env.NODE_ENV != "production") {
 	try {
-		const twitterKeys = require("./twitter-config");
-	} catch() {
+		twitterKeys = require("./twitter-config");
+	} catch(e) {
 		throw new Error("No twitter OAuth config file located");
 	}
 }
