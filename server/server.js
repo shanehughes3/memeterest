@@ -4,14 +4,15 @@ const express = require("express"),
 	TwitterStrategy = require("passport-twitter").Strategy,
 	routes = require("./routes"),
 	env = process.env.NODE_ENV || "development",
-	config = require("./config")[env];
+	config = require("./config")[env],
+	db = require("./db");
 
 passport.use(new TwitterStrategy({
 	consumerKey: config.twitterConsumerKey,
 	consumerSecret: config.twitterConsumerSecret,
 	callbackURL: config.twitterCallback
-}, function(token, tokenSecret, profile, done) {
-
+}, function(token, tokenSecret, profile, cb) {
+	db.userLogin(profile.id, cb);
 }));
 
 app.use(express.static("public"));

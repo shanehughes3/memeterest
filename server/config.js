@@ -1,23 +1,25 @@
-let twitterKeys = {};
+let configHelpers = {};
 if (process.env.NODE_ENV != "production") {
 	try {
-		twitterKeys = require("./twitter-config");
+		configHelpers = require("./config-helpers");
 	} catch(e) {
-		throw new Error("No twitter OAuth config file located");
+		throw new Error("No config helpers file located");
 	}
 }
 
 module.exports = {
 	development: {
 		port: 8080,
-		twitterConsumerKey: twitterKeys.consumerKey,
-		twitterConsumerSecret: twitterKeys.consumerSecret,
-		twitterCallback: "http://localhost:8080/auth/return"
+		twitterConsumerKey: configHelpers.consumerKey,
+		twitterConsumerSecret: configHelpers.consumerSecret,
+		twitterCallback: "http://localhost:8080/auth/return",
+		db: configHelpers.db
 	},
 	production: {
 		port: process.env.PORT,
 		twitterConsumerKey: process.env.TWITTER_CONSUMER_KEY,
 		twitterConsumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-		twitterCallback: "https://memeterest.shanehughes.io/auth/return"
+		twitterCallback: "https://memeterest.shanehughes.io/auth/return",
+		db: process.env.MONGO_URI
 	}
 };

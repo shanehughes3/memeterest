@@ -41,4 +41,4 @@ testem.log
 Thumbs.db
 
 *~
-/server/twitter-config.js
+/server/config-helpers.js
