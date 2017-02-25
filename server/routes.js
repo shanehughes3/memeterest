@@ -12,13 +12,14 @@ const router = express.Router();
 
 router.get("/auth/login", passport.authenticate("twitter"));
 
-router.get("/auth/return", (req, res) => {
+router.get("/auth/return",
 	passport.authenticate("twitter",
-	{ failureRedirect: "/auth/login" },
+	{ successRedirect: "/",
+	failureRedirect: "/auth/login" }),
 	(req, res) => {
 		res.redirect("/");
-	})
-});
+	}
+);
 
 /*
  * MEME API
@@ -49,6 +50,7 @@ router.delete("/api/:userId/:memeId", (req, res) => {
  */
 
 router.get("/*", (req, res) => {
+	console.log(req.user);
 	res.sendFile(path.join(__dirname + "/../public/index.html"));
 });
 

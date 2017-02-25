@@ -12,7 +12,7 @@ module.exports = {
 		port: 8080,
 		twitterConsumerKey: configHelpers.consumerKey,
 		twitterConsumerSecret: configHelpers.consumerSecret,
-		twitterCallback: "http://localhost:8080/auth/return",
+		twitterCallback: "http://127.0.0.1:8080/auth/return",
 		db: configHelpers.db,
 		sessionSecret: "cats"
 	},
