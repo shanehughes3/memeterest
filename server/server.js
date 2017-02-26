@@ -14,7 +14,7 @@ const express = require("express"),
 app.use(scribe({removeIPv4Prefix: true}));
 
 app.use(cookieParser());
-app.use(bodyParser());
+//app.use(bodyParser());
 app.use(session({
 	secret: config.sessionSecret,
 	cookie: {
@@ -29,7 +29,6 @@ passport.use(new TwitterStrategy({
 	consumerSecret: config.twitterConsumerSecret,
 	callbackURL: config.twitterCallback
 }, function(token, tokenSecret, profile, cb) {
-	console.log(profile);
 	db.userLogin(profile, cb);
 }));
 passport.serializeUser((user, cb) => {

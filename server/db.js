@@ -3,10 +3,9 @@ const config = require("./config")[env];
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 
+mongoose.Promise = global.Promise; // silence DeprecationWarning
+
 const db = mongoose.connect(config.db);
-const dbTest = mongoose.connection;
-dbTest.on("error", console.error.bind(console, "MongoDB connection error"));
-dbTest.once("open", () => console.log("Connection success"));
 
 const UserSchema = new mongoose.Schema({});
 UserSchema.plugin(passportLocalMongoose);
@@ -40,13 +39,28 @@ exports.userLogin = function(profile, cb) {
                 twitterUsername: profile.username
             });
             user.save((err) => {
-                if (err) {
-                    console.error(err);
-                }
+                if (err) { console.error(err); }
                 cb(err, user);
             });
         } else {
             cb(null, user);
         }
+    });
+};
+
+exports.getUserInfo = function(id, cb) {
+    User.findOne({
+        _id: id
+    }, (err, user) => {
+        cb(err, user);
+    });
+};
+
+exports.deleteUser = function(id, cb) {
+    User.findOneAndRemove({
+        _id: id
+    }, (err, user) => {
+        if (err) { console.error(err); }
+        cb(err, user);
     });
 };
