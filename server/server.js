@@ -29,7 +29,8 @@ passport.use(new TwitterStrategy({
 	consumerSecret: config.twitterConsumerSecret,
 	callbackURL: config.twitterCallback
 }, function(token, tokenSecret, profile, cb) {
-	db.userLogin(profile.id, cb);
+	console.log(profile);
+	db.userLogin(profile, cb);
 }));
 passport.serializeUser((user, cb) => {
 	cb(null, user);

@@ -21,6 +21,12 @@ router.get("/auth/return",
 	}
 );
 
+router.get("/auth/logout", (req, res) => {
+	req.logout();
+	res.redirect("/");
+});
+
+
 /*
  * MEME API
  */
