@@ -36,7 +36,7 @@ exports.userLogin = function(profile, cb) {
         } else if (!user) {
             user = new User({
                 twitterId: profile.id,
-                twitterUsername: profile.username
+                username: profile.username
             });
             user.save((err) => {
                 if (err) { console.error(err); }

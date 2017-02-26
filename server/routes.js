@@ -56,7 +56,6 @@ router.delete("/api/:userId/:memeId", (req, res) => {
  */
 
 router.get("/*", (req, res) => {
-	console.log(req.user);
 	res.sendFile(path.join(__dirname + "/../public/index.html"));
 });
 
