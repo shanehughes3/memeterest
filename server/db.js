@@ -126,5 +126,10 @@ exports.deleteUser = function(id, cb) {
  };
 
  exports.getUserMemes = function(userId, cb) {
-    
+    Meme.find({
+        userId: userId
+    }, (err, memes) => {
+        if (err) { console.error(err); }
+        cb(err, memes);
+    })
  };

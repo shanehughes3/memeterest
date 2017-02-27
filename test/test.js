@@ -1,5 +1,7 @@
 const db = require("../server/db.js");
-const should = require("chai").should();
+const chai = require("chai");
+chai.use(require("chai-things"));
+const should = chai.should();
 
 describe("API", function() {
     let userId;
@@ -53,7 +55,20 @@ describe("API", function() {
             });
         });
 
-        it("should retrieve user memes");
+        it("should retrieve user memes", function(done) {
+            db.getUserMemes(userId, (err, memes) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(memes);
+                    memes.should.be.an("array");
+                    memes.should.have.length.of.at.least(1);
+                    // this is not ideal - would like to test on _id against memeID,
+                    // but chai-things doesn't seem to support such a thing right now
+                    memes.should.contain.a.thing.with.property("text", "A dank test meme");
+                    done();
+                }
+            });
+        });
 
         it("should edit user meme", function(done) {
             db.editMeme(userId, memeId, {
