@@ -14,6 +14,7 @@ describe("API", function() {
                 if (err) { done(err); }
                 else {
                     should.exist(user);
+                    user.should.have.property("_id");
                     userId = user._id;
                     done();
                 }
@@ -30,6 +31,59 @@ describe("API", function() {
                 }
             });
         });
+    });
+
+    describe("Meme", function() {
+        let memeId;
+
+        it("should retrieve all memes");
+
+        it("should save new memes", function(done) {
+            db.newMeme(userId, {
+                imageURL: "http://www.test.com",
+                text: "A dank test meme"
+            }, (err, newMeme) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(newMeme);
+                    newMeme.should.have.property("_id");
+                    memeId = newMeme._id.toString();
+                    done();
+                }
+            });
+        });
+
+        it("should retrieve user memes");
+
+        it("should edit user meme", function(done) {
+            db.editMeme(userId, memeId, {
+                text: "New test meme text"
+            }, (err, editedMeme) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(editedMeme);
+                    editedMeme.should.have.property("_id");
+                    editedMeme._id.toString().should.equal(memeId);
+                    editedMeme.should.have.property("text", "New test meme text");
+                    done();
+                }
+            });
+        });
+
+        it("should delete user memes", function(done) {
+            db.deleteMeme(userId, memeId, (err, deletedMeme) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(deletedMeme);
+                    deletedMeme.should.have.property("_id");
+                    deletedMeme._id.toString().should.equal(memeId);
+                    done();
+                }
+            });
+        });
+    });
+
+    describe("User (cleanup)", function() {
 
         it("should delete user", function(done) {
             db.deleteUser(userId, (err, user) => {
@@ -41,13 +95,5 @@ describe("API", function() {
                 }
             })
         });
-    });
-
-    describe("Meme", function() {
-        it("should retrieve all memes");
-        it("should save new memes");
-        it("should retrieve user memes");
-        it("should edit user meme");
-        it("should delete user memes");
     });
 });

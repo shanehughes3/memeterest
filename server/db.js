@@ -15,7 +15,7 @@ UserSchema.add({
  });
 
 const MemeSchema = new mongoose.Schema({
-    userId: Number,
+    userId: String,
     imageURL: String,
     text: String,
     likes: Number,
@@ -25,6 +25,10 @@ const MemeSchema = new mongoose.Schema({
 const User = mongoose.model("User", UserSchema);
 const Meme = mongoose.model("Meme", MemeSchema);
 exports.User = User;
+
+/*
+ * USER
+ */
 
 exports.userLogin = function(profile, cb) {
     User.findOne({
@@ -64,3 +68,63 @@ exports.deleteUser = function(id, cb) {
         cb(err, user);
     });
 };
+
+/*
+ * MEME
+ */
+
+ exports.newMeme = function(userId, memeInfo, cb) {
+     Meme.create({
+         userId: userId,
+         imageURL: memeInfo.imageURL,
+         text: memeInfo.text,
+         likes: 0,
+         shares: 0
+     }, (err, newMeme) => {
+         if (err) { console.error(err); }
+         cb(err, newMeme);
+     });
+ };
+
+ exports.editMeme = function(userId, memeId, updates, cb) {
+    Meme.findById(memeId, (err, meme) => {
+        if (err) {
+            console.error(err);
+            cb(err);
+        } else if (!meme) {
+            cb(new Error("No meme found"));
+        } else if (userId != meme.userId) {
+            cb(new Error("Unauthorized"));
+        } else {
+            for (let key in updates) {
+                meme[key] = updates[key];
+            }
+            meme.save((err) => {
+                if (err) { console.error(err); }
+                cb(err, meme);
+            });
+        }
+    });
+ };
+
+ exports.deleteMeme = function(userId, memeId, cb) {
+     Meme.findById({
+         _id: memeId
+     }, (err, meme) => {
+         if (err) {
+             console.error(err);
+             cb(err);
+         } else if (userId != meme.userId) {
+             cb(new Error("Unauthorized"));
+         } else {
+             meme.remove((err) => {
+                 if (err) { console.error(err); }
+                 cb(err, meme);
+             })
+         }
+     });
+ };
+
+ exports.getUserMemes = function(userId, cb) {
+    
+ };
