@@ -133,3 +133,12 @@ exports.deleteUser = function(id, cb) {
         cb(err, memes);
     })
  };
+
+ exports.getAllMemes = function(options, cb) {
+     Meme.find()
+     .skip(options.offset || 0)
+     .limit(options.limit || 100)
+     .exec((err, memes) => {
+         cb(err, memes);
+     });
+ };

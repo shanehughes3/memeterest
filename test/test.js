@@ -5,6 +5,7 @@ const should = chai.should();
 
 describe("API", function() {
     let userId;
+    let userId2;
 
     describe("User", function() {
 
@@ -18,6 +19,21 @@ describe("API", function() {
                     should.exist(user);
                     user.should.have.property("_id");
                     userId = user._id;
+                    done();
+                }
+            })
+        });
+
+        it("should save another user", function(done) {
+            db.userLogin({
+                id: "987654321",
+                username: "other_test"
+            }, (err, user) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(user);
+                    user.should.have.property("_id");
+                    userId2 = user._id;
                     done();
                 }
             })
@@ -37,10 +53,9 @@ describe("API", function() {
 
     describe("Meme", function() {
         let memeId;
+        let memeId2;
 
-        it("should retrieve all memes");
-
-        it("should save new memes", function(done) {
+        it("should save new meme", function(done) {
             db.newMeme(userId, {
                 imageURL: "http://www.test.com",
                 text: "A dank test meme"
@@ -54,6 +69,21 @@ describe("API", function() {
                 }
             });
         });
+
+        it("should save another meme", function(done) {
+            db.newMeme(userId2, {
+                imageURL: "http://www.test.com",
+                text: "The other test meme"
+            }, (err, newMeme) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(newMeme);
+                    newMeme.should.have.property("_id");
+                    memeId2 = newMeme._id.toString();
+                    done();
+                }
+            })
+        })
 
         it("should retrieve user memes", function(done) {
             db.getUserMemes(userId, (err, memes) => {
@@ -70,6 +100,15 @@ describe("API", function() {
             });
         });
 
+        it("should retrieve all memes", function(done) {
+            db.getAllMemes({ limit: 15 }, (err, memes) => {
+                if (err) { done(err); }
+                memes.should.be.an("Array");
+                memes.should.have.length.of.at.least(2);
+                done();
+            });
+        })
+
         it("should edit user meme", function(done) {
             db.editMeme(userId, memeId, {
                 text: "New test meme text"
@@ -85,7 +124,7 @@ describe("API", function() {
             });
         });
 
-        it("should delete user memes", function(done) {
+        it("should delete user meme", function(done) {
             db.deleteMeme(userId, memeId, (err, deletedMeme) => {
                 if (err) { done(err); }
                 else {
@@ -96,6 +135,18 @@ describe("API", function() {
                 }
             });
         });
+
+        it("should delete the other user meme", function(done) {
+            db.deleteMeme(userId2, memeId2, (err, deletedMeme) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(deletedMeme);
+                    deletedMeme.should.have.property("_id");
+                    deletedMeme._id.toString().should.equal(memeId2);
+                    done();
+                }
+            })
+        })
     });
 
     describe("User (cleanup)", function() {
@@ -110,5 +161,16 @@ describe("API", function() {
                 }
             })
         });
+
+        it("should delete other user", function(done) {
+            db.deleteUser(userId2, (err, user) => {
+                if (err) { done(err); }
+                else {
+                    should.exist(user);
+                    user.should.have.property("username", "other_test");
+                    done();
+                }
+            })
+        })
     });
 });

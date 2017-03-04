@@ -2,7 +2,7 @@
 const express = require("express")
 const path = require("path");
 const passport = require("passport");
-
+const db = require("./db");
 
 const router = express.Router();
 
@@ -32,7 +32,7 @@ router.get("/auth/logout", (req, res) => {
  */
 
 router.get("/api/all", (req, res) => {
-	// get all memes
+	
 });
 
 router.get("/api/:userId", (req, res) => {
