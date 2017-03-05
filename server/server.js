@@ -14,7 +14,7 @@ const express = require("express"),
 app.use(scribe({removeIPv4Prefix: true}));
 
 app.use(cookieParser());
-//app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(session({
 	secret: config.sessionSecret,
 	cookie: {

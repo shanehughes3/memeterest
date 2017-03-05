@@ -26,6 +26,19 @@ router.get("/auth/logout", (req, res) => {
 	res.redirect("/");
 });
 
+router.get("/auth/info", (req, res) => {
+	db.getUserInfo(req.user.id, (err, user) => {
+		if (err) {
+			console.error(err);
+			res.sendStatus(500);
+		} else if (!user) {
+			res.sendStatus(401);
+		} else {
+			res.json({ user: user });
+		}
+	})
+});
+
 
 /*
  * MEME API
