@@ -27,15 +27,14 @@ router.get("/auth/logout", (req, res) => {
 });
 
 router.get("/auth/info", (req, res) => {
+	console.log(req.user);
 	if (!req.user) {
 		res.sendStatus(401);
 	} else {
-		db.getUserInfo(req.user.id, (err, user) => {
+		db.getUserInfo(req.user._id, (err, user) => {
 			if (err) {
 				console.error(err);
 				res.sendStatus(500);
-			} else if (!user) {
-				res.sendStatus(401);
 			} else {
 				res.json({ user: user });
 			}
@@ -64,7 +63,7 @@ router.get("/api/all", (req, res) => {
 });
 
 router.get("/api/:userId", (req, res) => {
-	db.getUserMemes(req.user.id, (err, memes) => {
+	db.getUserMemes(req.user._id, (err, memes) => {
 		if (err) {
 			console.error(err);
 			res.sendStatus(500);
@@ -75,7 +74,7 @@ router.get("/api/:userId", (req, res) => {
 });
 
 router.post("/api/:userId", (req, res) => {
-	db.newMeme(req.user.id, req.body.meme, (err, meme) => {
+	db.newMeme(req.user._id, req.body.meme, (err, meme) => {
 		if (err) {
 			console.error(err);
 			res.sendStatus(500);
@@ -86,10 +85,10 @@ router.post("/api/:userId", (req, res) => {
 });
 
 router.put("/api/:userId/:memeId", (req, res) => {
-	if (req.user.id != req.params.userId) {
+	if (req.user._id != req.params.userId) {
 		res.sendStatus(401);
 	} else {
-		db.editMeme(req.user.id, req.params.memeId,
+		db.editMeme(req.user._id, req.params.memeId,
 		req.body.edits, (err, meme) => {
 			if (err) {
 				if (err.message == "Unauthorized") {
@@ -108,10 +107,10 @@ router.put("/api/:userId/:memeId", (req, res) => {
 });
 
 router.delete("/api/:userId/:memeId", (req, res) => {
-	if (req.user.id != req.params.userId) {
+	if (req.user._id != req.params.userId) {
 		res.sendStatus(401);
 	} else {
-		db.deleteMeme(req.user.id, req.params.memeId,
+		db.deleteMeme(req.user._id, req.params.memeId,
 		(err, meme) => {
 			if (err) {
 				if (err.message == "Unauthorized") {
