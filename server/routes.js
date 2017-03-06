@@ -27,16 +27,21 @@ router.get("/auth/logout", (req, res) => {
 });
 
 router.get("/auth/info", (req, res) => {
-	db.getUserInfo(req.user.id, (err, user) => {
-		if (err) {
-			console.error(err);
-			res.sendStatus(500);
-		} else if (!user) {
-			res.sendStatus(401);
-		} else {
-			res.json({ user: user });
-		}
-	})
+	if (!req.user) {
+		res.sendStatus(401);
+	} else {
+		db.getUserInfo(req.user.id, (err, user) => {
+			if (err) {
+				console.error(err);
+				res.sendStatus(500);
+			} else if (!user) {
+				res.sendStatus(401);
+			} else {
+				res.json({ user: user });
+			}
+		});
+	}
+
 });
 
 
