@@ -8,6 +8,9 @@ import { ApiService } from "./api.service";
 })
 export class AppComponent {
     title = 'app works!';
+    loggedIn: boolean = false;
+    loading: boolean = true;
+    user: any;
 
     constructor (
         private api: ApiService
@@ -17,9 +20,14 @@ export class AppComponent {
         this.api.getUserInfo()
         .subscribe(
             (data) => {
-                console.log(data);
+                this.loggedIn = true;
+                this.loading = false;
+                this.user = data.json().user;
+                console.log(data, this.user);
             },
             (err) => {
+                this.loggedIn = false;
+                this.loading = false;
                 console.warn(err);
             }
         );
