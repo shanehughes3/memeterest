@@ -62619,7 +62619,8 @@ webpackEmptyContext.id = 351;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(287);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(461);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_login_login__ = __webpack_require__(462);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__api_service__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_user_dashboard_user_dashboard__ = __webpack_require__(792);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_service__ = __webpack_require__(305);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -62637,6 +62638,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -62644,14 +62646,15 @@ var AppModule = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__components_login_login__["a" /* LoginComponent */]
+                __WEBPACK_IMPORTED_MODULE_5__components_login_login__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__components_user_dashboard_user_dashboard__["a" /* UserDashboardComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_6__api_service__["a" /* ApiService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_7__api_service__["a" /* ApiService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         }), 
         __metadata('design:paramtypes', [])
@@ -77471,7 +77474,7 @@ var LoginComponent = (function () {
 /* 513 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n    <login-component *ngIf=\"loggedIn === false\">\n    </login-component>\n    <div *ngIf=\"loggedIn === true\">\n        Hello, {{user.twitterUsername}}!\n    </div>\n</div>\n";
+module.exports = "<div>\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n    <login-component *ngIf=\"loggedIn === false\">\n    </login-component>\n\t<user-dashboard-component *ngIf=\"loggedIn === true\"\n\t\t[user]=\"user\"></user-dashboard-component>\n</div>\n";
 
 /***/ }),
 /* 514 */
@@ -91333,6 +91336,55 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
 
+
+/***/ }),
+/* 791 */,
+/* 792 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserDashboardComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var UserDashboardComponent = (function () {
+    function UserDashboardComponent() {
+    }
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
+        __metadata('design:type', Object)
+    ], UserDashboardComponent.prototype, "user", void 0);
+    UserDashboardComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Component */])({
+            selector: "user-dashboard-component",
+            template: __webpack_require__(793),
+            styles: [__webpack_require__(794)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], UserDashboardComponent);
+    return UserDashboardComponent;
+}());
+
+
+/***/ }),
+/* 793 */
+/***/ (function(module, exports) {
+
+module.exports = "<div>\n    Hi there, {{user.twitterUsername}}!\n</div>\n";
+
+/***/ }),
+/* 794 */
+/***/ (function(module, exports) {
+
+module.exports = "// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = require(\"!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./user-dashboard.scss\");\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = require(\"!../../../node_modules/style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(module.hot) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./user-dashboard.scss\", function() {\n\t\t\tvar newContent = require(\"!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./user-dashboard.scss\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}"
 
 /***/ })
 ],[790]);

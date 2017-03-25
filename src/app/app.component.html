@@ -4,7 +4,6 @@
     </div>
     <login-component *ngIf="loggedIn === false">
     </login-component>
-    <div *ngIf="loggedIn === true">
-        Hello, {{user.twitterUsername}}!
-    </div>
+	<user-dashboard-component *ngIf="loggedIn === true"
+		[user]="user"></user-dashboard-component>
 </div>
