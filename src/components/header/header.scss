@@ -1,0 +1,15 @@
+:host {
+	width: 100%;
+	div {
+		border-bottom: 1px solid black;
+		margin-bottom: 1em;
+	}
+
+	.buttons-container {
+		float: right;
+		span, a {
+			margin-left: 1em;
+			margin-right: 1em;
+		}
+	}
+}

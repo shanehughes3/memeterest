@@ -1,0 +1,14 @@
+<div>
+    <span class="site-name">MEMETEREST</span>
+	<span class="buttons-container">
+		<a *ngIf="!user?.twitterUsername" href="/auth/login">
+			Log in with Twitter
+		</a>
+		<span *ngIf="user?.twitterUsername">All memes</span>
+		<span *ngIf="user?.twitterUsername">My memes</span>
+		<span *ngIf="user?.twitterUsername">Add</span>
+		<a *ngIf="user?.twitterUsername" href="/logout">
+			Log out
+		</a>
+	</span>
+</div>

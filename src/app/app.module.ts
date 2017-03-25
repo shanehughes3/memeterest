@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from "../components/login/login";
 import { UserDashboardComponent } from "../components/user-dashboard/user-dashboard";
+import { HeaderComponent } from "../components/header/header";
 import { ApiService } from "./api.service";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-	UserDashboardComponent
+	UserDashboardComponent,
+	HeaderComponent
   ],
   imports: [
     BrowserModule,

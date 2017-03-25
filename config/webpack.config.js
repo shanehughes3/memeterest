@@ -37,6 +37,19 @@ module.exports = {
 				loader: 'file-loader?name=assets/[name].[hash].[ext]'
 			},
 			{
+				test: /\.scss$/,
+				loader: ["raw-loader", "sass-loader?sourceMap"]
+				// use: [{
+				// 	loader: "raw-loader"
+				// }, {
+				// 	loader: "style-loader"
+				// }, {
+				// 	loader: "css-loader"
+				// }, {
+				// 	loader: "sass-loader"
+				// }]
+			},
+			{
 				test: /\.css$/,
 				exclude: helpers.root('src', 'app'),
 				loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
@@ -45,18 +58,6 @@ module.exports = {
 				test: /\.css$/,
 				include: helpers.root('src', 'app'),
 				loader: 'raw-loader'
-			},
-			{
-				test: /\.scss$/,
-				use: [{
-					loader: "raw-loader"
-				}, {
-					loader: "style-loader"
-				}, {
-					loader: "css-loader"
-				}, {
-					loader: "sass-loader"
-				}]
 			}
 		]
 	},

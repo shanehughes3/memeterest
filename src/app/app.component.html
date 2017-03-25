@@ -1,9 +1,8 @@
 <div>
+	<header-component [user]="user"></header-component>
     <div *ngIf="loading">
         Checking login...
     </div>
-    <login-component *ngIf="loggedIn === false">
-    </login-component>
 	<user-dashboard-component *ngIf="loggedIn === true"
 		[user]="user"></user-dashboard-component>
 </div>
