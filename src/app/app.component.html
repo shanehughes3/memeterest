@@ -1,5 +1,7 @@
 <div>
-	<header-component [user]="user"></header-component>
+	<header-component [user]="user" (selectPage)="selectPage($event)"
+		[currentPage]="currentPage">
+	</header-component>
     <div *ngIf="loading">
         Checking login...
     </div>

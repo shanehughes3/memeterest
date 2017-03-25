@@ -4,9 +4,18 @@
 		<a *ngIf="!user?.twitterUsername" href="/auth/login">
 			Log in with Twitter
 		</a>
-		<span *ngIf="user?.twitterUsername">All memes</span>
-		<span *ngIf="user?.twitterUsername">My memes</span>
-		<span *ngIf="user?.twitterUsername">Add</span>
+		<span *ngIf="user?.twitterUsername" (click)="selectPage.emit('all')"
+			[ngClass]="{'selected': currentPage == 'all'}">
+			All memes
+		</span>
+		<span *ngIf="user?.twitterUsername" (click)="selectPage.emit('mine')"
+			[ngClass]="{'selected': currentPage == 'mine'}">
+			My memes
+		</span>
+		<span *ngIf="user?.twitterUsername" (click)="selectPage.emit('add')"
+			[ngClass]="{'selected': currentPage == 'add'}">
+			Add
+		</span>
 		<a *ngIf="user?.twitterUsername" href="/logout">
 			Log out
 		</a>

@@ -8,8 +8,15 @@
 	.buttons-container {
 		float: right;
 		span, a {
+			cursor: pointer;
 			margin-left: 1em;
 			margin-right: 1em;
+		}
+		.selected {
+			font-weight: bold;
+		}
+		a {
+			text-decoration: none;
 		}
 	}
 }

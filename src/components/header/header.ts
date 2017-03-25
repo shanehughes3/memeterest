@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
     selector: "header-component",
@@ -7,6 +7,8 @@ import { Component, Input } from "@angular/core";
 })
 export class HeaderComponent {
 	@Input() user;
+	@Input() currentPage: string;
+	@Output() selectPage = new EventEmitter();
     constructor() { }
 
 }

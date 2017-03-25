@@ -5,13 +5,14 @@ import { ApiService } from "./api.service";
     selector: 'app-root',
 	// encapsulation: ViewEncapsulation.None,
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
     title = 'app works!';
     loggedIn: boolean = false;
     loading: boolean = true;
     user: any;
+	currentPage: string = "all";
 
     constructor (
         private api: ApiService
@@ -33,4 +34,8 @@ export class AppComponent {
             }
         );
     }
+
+	selectPage(page) {
+		this.currentPage = page;
+	}
 }
