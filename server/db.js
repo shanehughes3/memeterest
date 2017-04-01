@@ -5,7 +5,14 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 mongoose.Promise = global.Promise; // silence DeprecationWarning
 
-const db = mongoose.connect(config.db);
+const db = mongoose.connect(config.db, {
+	server: {
+		socketOptions: {
+			socketTimeoutMS: 0,
+			connectionTimeout: 0
+		}
+	}
+});
 
 const UserSchema = new mongoose.Schema({});
 UserSchema.plugin(passportLocalMongoose);

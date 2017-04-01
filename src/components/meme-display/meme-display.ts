@@ -16,6 +16,10 @@ export class MemeDisplayComponent {
 	) { }
 
 	ngOnInit() {
+		this.getMemes();
+	}
+
+	private getMemes() {
 		if (this.pageType == "all") {
 			this.api.getAllMemes()
 				.subscribe(
@@ -35,5 +39,17 @@ export class MemeDisplayComponent {
 					(err) => { console.error(err); }
 				);
 		}
+	}
+
+	public deleteMeme(meme) {
+		this.api.deleteMeme(this.user._id, meme._id)
+			.subscribe(
+				(res) => { this.getMemes(); },
+				(err) => { console.error(err); }
+			);
+	}
+
+	public thisMemeIsDank(meme) {
+		
 	}
 }

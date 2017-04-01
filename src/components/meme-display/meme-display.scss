@@ -1,3 +1,34 @@
 :host {
-
+	.container {
+		display: flex;
+		.meme {
+			position: relative;
+			border: 1px solid black;
+			padding: 1em;
+			padding-bottom: 4em;
+			margin: 1em;
+			.delete-button {
+				position: absolute;
+				top: -0.25em;
+				right: 0;
+				font-size: 2em;
+				cursor: pointer;
+			}
+			.meme-image {
+				max-width: 13em;
+				max-height: 13em;
+			}
+			.info-container {
+				text-align: right;
+				position: absolute;
+				bottom: 1em;
+				right: 1em;
+				.troll-face {
+					width: auto;
+					height: 2em;
+					cursor: pointer;
+				}
+			}
+		}
+	}
 }

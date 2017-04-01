@@ -91392,6 +91392,9 @@ var MemeDisplayComponent = (function () {
         this.api = api;
     }
     MemeDisplayComponent.prototype.ngOnInit = function () {
+        this.getMemes();
+    };
+    MemeDisplayComponent.prototype.getMemes = function () {
         var _this = this;
         if (this.pageType == "all") {
             this.api.getAllMemes()
@@ -91407,6 +91410,13 @@ var MemeDisplayComponent = (function () {
                 _this.memes = res.json().memes;
             }, function (err) { console.error(err); });
         }
+    };
+    MemeDisplayComponent.prototype.deleteMeme = function (meme) {
+        var _this = this;
+        this.api.deleteMeme(this.user._id, meme._id)
+            .subscribe(function (res) { _this.getMemes(); }, function (err) { console.error(err); });
+    };
+    MemeDisplayComponent.prototype.thisMemeIsDank = function (meme) {
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
@@ -91432,13 +91442,13 @@ var MemeDisplayComponent = (function () {
 /* 796 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    \n</div>\n";
+module.exports = "<div class=\"container\">\n    <div *ngFor=\"let meme of memes\" class=\"meme\">\n\t\t<div *ngIf=\"pageType == 'mine'\" class=\"delete-button\"\n\t\t\t(click)=\"deleteMeme(meme)\">\n\t\t\t&times;\n\t\t</div>\n\t\t<img [src]=\"meme.imageURL\" class=\"meme-image\"/>\n\t\t<div>\n\t\t\t{{meme.text}}\n\t\t</div>\n\t\t<div class=\"info-container\">\n\t\t\t<div>\n\t\t\t\t<img src=\"http://i.imgur.com/maStk86.png\"\n\t\t\t\t\tclass=\"troll-face\" (click)=\"thisMemeIsDank(meme)\"/>\n\t\t\t\t\tx{{meme.likes}}\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n";
 
 /***/ }),
 /* 797 */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ":host .container {\n  display: flex; }\n  :host .container .meme {\n    position: relative;\n    border: 1px solid black;\n    padding: 1em;\n    padding-bottom: 4em;\n    margin: 1em; }\n    :host .container .meme .delete-button {\n      position: absolute;\n      top: -0.25em;\n      right: 0;\n      font-size: 2em;\n      cursor: pointer; }\n    :host .container .meme .meme-image {\n      max-width: 13em;\n      max-height: 13em; }\n    :host .container .meme .info-container {\n      text-align: right;\n      position: absolute;\n      bottom: 1em;\n      right: 1em; }\n      :host .container .meme .info-container .troll-face {\n        width: auto;\n        height: 2em;\n        cursor: pointer; }\n"
 
 /***/ }),
 /* 798 */

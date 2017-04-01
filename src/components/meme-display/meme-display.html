@@ -1,3 +1,19 @@
-<div>
-    
+<div class="container">
+    <div *ngFor="let meme of memes" class="meme">
+		<div *ngIf="pageType == 'mine'" class="delete-button"
+			(click)="deleteMeme(meme)">
+			&times;
+		</div>
+		<img [src]="meme.imageURL" class="meme-image"/>
+		<div>
+			{{meme.text}}
+		</div>
+		<div class="info-container">
+			<div>
+				<img src="http://i.imgur.com/maStk86.png"
+					class="troll-face" (click)="thisMemeIsDank(meme)"/>
+					x{{meme.likes}}
+			</div>
+		</div>
+	</div>
 </div>
