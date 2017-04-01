@@ -5,6 +5,14 @@
     <div *ngIf="loading">
         Checking login...
     </div>
-	<user-dashboard-component *ngIf="loggedIn === true"
-		[user]="user"></user-dashboard-component>
+	<meme-display *ngIf="currentPage == 'all'" [user]="user"
+		[pageType]="currentPage">
+	</meme-display>
+	<meme-display *ngIf="currentPage == 'mine'" [user]="user"
+		[pageType]="currentPage">
+	</meme-display>
+	<div *ngIf="currentPage == 'add'">
+		--- this is the add page ---
+	</div>
+
 </div>

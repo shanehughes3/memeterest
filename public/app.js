@@ -62625,7 +62625,8 @@ webpackEmptyContext.id = 351;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(461);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_user_dashboard_user_dashboard__ = __webpack_require__(463);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_header_header__ = __webpack_require__(462);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_service__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_meme_display_meme_display__ = __webpack_require__(795);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__api_service__ = __webpack_require__(305);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -62644,6 +62645,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -62652,14 +62654,15 @@ var AppModule = (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_5__components_user_dashboard_user_dashboard__["a" /* UserDashboardComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__components_header_header__["a" /* HeaderComponent */]
+                __WEBPACK_IMPORTED_MODULE_6__components_header_header__["a" /* HeaderComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__components_meme_display_meme_display__["a" /* MemeDisplayComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_7__api_service__["a" /* ApiService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_8__api_service__["a" /* ApiService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         }), 
         __metadata('design:paramtypes', [])
@@ -77533,7 +77536,7 @@ var UserDashboardComponent = (function () {
 /* 514 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\t<user-dashboard-component *ngIf=\"loggedIn === true\"\n\t\t[user]=\"user\"></user-dashboard-component>\n</div>\n";
+module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\t<meme-display *ngIf=\"currentPage == 'all'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\t<meme-display *ngIf=\"currentPage == 'mine'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\t<div *ngIf=\"currentPage == 'add'\">\n\t\t--- this is the add page ---\n\t</div>\n\n</div>\n";
 
 /***/ }),
 /* 515 */
@@ -91407,6 +91410,79 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
 
+
+/***/ }),
+/* 794 */,
+/* 795 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_api_service__ = __webpack_require__(305);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MemeDisplayComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var MemeDisplayComponent = (function () {
+    function MemeDisplayComponent(api) {
+        this.api = api;
+    }
+    MemeDisplayComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this.pageType == "all") {
+            this.api.getAllMemes()
+                .subscribe(function (res) {
+                console.log(res);
+                _this.memes = res.json().memes;
+            }, function (err) { console.error(err); });
+        }
+        else if (this.pageType == "mine") {
+            this.api.getUserMemes(this.user._id)
+                .subscribe(function (res) {
+                console.log(res);
+                _this.memes = res.json().memes;
+            }, function (err) { console.error(err); });
+        }
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
+        __metadata('design:type', Object)
+    ], MemeDisplayComponent.prototype, "user", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
+        __metadata('design:type', String)
+    ], MemeDisplayComponent.prototype, "pageType", void 0);
+    MemeDisplayComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Component */])({
+            selector: "meme-display",
+            template: __webpack_require__(796),
+            styles: [__webpack_require__(797)]
+        }), 
+        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_1__app_api_service__["a" /* ApiService */]])
+    ], MemeDisplayComponent);
+    return MemeDisplayComponent;
+}());
+
+
+/***/ }),
+/* 796 */
+/***/ (function(module, exports) {
+
+module.exports = "<div>\n    \n</div>\n";
+
+/***/ }),
+/* 797 */
+/***/ (function(module, exports) {
+
+module.exports = ""
 
 /***/ })
 ],[793]);
