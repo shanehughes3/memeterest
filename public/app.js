@@ -62660,6 +62660,7 @@ var AppModule = (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_8__api_service__["a" /* ApiService */]],
@@ -74969,14 +74970,14 @@ function endTimeRange(range) {
 /* unused harmony reexport FormBuilder */
 /* unused harmony reexport AbstractControl */
 /* unused harmony reexport FormArray */
-/* unused harmony reexport FormControl */
-/* unused harmony reexport FormGroup */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["d"]; });
 /* unused harmony reexport NG_ASYNC_VALIDATORS */
 /* unused harmony reexport NG_VALIDATORS */
-/* unused harmony reexport Validators */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["e"]; });
 /* unused harmony reexport VERSION */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["a"]; });
-/* unused harmony reexport ReactiveFormsModule */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["b"]; });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -75176,7 +75177,7 @@ function normalizeAsyncValidator(validator) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_radio_control_value_accessor__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(285);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormsModule; });
-/* unused harmony export ReactiveFormsModule */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ReactiveFormsModule; });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -75299,17 +75300,17 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__model__ = __webpack_require__(128);
 /* unused harmony reexport AbstractControl */
 /* unused harmony reexport FormArray */
-/* unused harmony reexport FormControl */
-/* unused harmony reexport FormGroup */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__validators__ = __webpack_require__(31);
 /* unused harmony reexport NG_ASYNC_VALIDATORS */
 /* unused harmony reexport NG_VALIDATORS */
-/* unused harmony reexport Validators */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__version__ = __webpack_require__(438);
 /* unused harmony reexport VERSION */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__form_providers__ = __webpack_require__(436);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_23__form_providers__["a"]; });
-/* unused harmony reexport ReactiveFormsModule */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_23__form_providers__["b"]; });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -91445,6 +91446,8 @@ module.exports = ""
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(433);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_api_service__ = __webpack_require__(305);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddMemeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -91456,9 +91459,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var AddMemeComponent = (function () {
-    function AddMemeComponent() {
+    function AddMemeComponent(api) {
+        this.api = api;
+        this.URLTest = /^(https?:\/\/)?[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
+        this.inputs = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormGroup */]({
+            memeURL: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].pattern(this.URLTest)),
+            memeDescription: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormControl */]("")
+        });
+        this.isImageLoading = false;
+        this.wasThereAnImageError = false;
     }
+    AddMemeComponent.prototype.tryToLoadImage = function () {
+        if (this.inputs.controls.memeURL.valid) {
+            this.imageURLForPreloading = this.inputs.controls.memeURL.value;
+        }
+    };
+    AddMemeComponent.prototype.submit = function () {
+        this.api.saveMeme(this.user._id, {
+            imageURL: this.inputs.controls.memeURL.value,
+            text: this.inputs.controls.memeDescription.value
+        })
+            .subscribe(function (res) { console.log(res); }, function (err) { console.error(err); });
+    };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
         __metadata('design:type', Object)
@@ -91469,7 +91494,7 @@ var AddMemeComponent = (function () {
             template: __webpack_require__(799),
             styles: [__webpack_require__(800)]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_2__app_api_service__["a" /* ApiService */]])
     ], AddMemeComponent);
     return AddMemeComponent;
 }());
@@ -91479,13 +91504,13 @@ var AddMemeComponent = (function () {
 /* 799 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    Gimme some dank memes.\n\n\t<div>\n\t\t<input [(ngModel)]=\"memeURL\" placeholder=\"Image URL\"/>\n\t</div>\n\n\t<div>\n\t\t<input [(ngModel)]=\"memeDescription\" placeholder=\"Caption\"/>\n\t</div>\n\n\t<button (click)=\"submit\">SUBMIT</button>\n</div>\n";
+module.exports = "<div class=\"container\">\n\t<div [formGroup]=\"inputs\">\n\t\tGimme some dank memes.\n\t\t<div>\n\t\t\t<input formControlName=\"memeURL\" placeholder=\"Image URL\"\n\t\t\t\t(blur)=\"tryToLoadImage()\"/>\n\t\t</div>\n\n\t\t<div>\n\t\t\t<input formControlName=\"memeDescription\" placeholder=\"Caption\"/>\n\t\t</div>\n\n\t\t<button (click)=\"submit()\" type=\"submit\" [disabled]=\"wasThereAnImageError ||\n\t\t\t!inputs.controls.memeURL.valid\">\n\t\t\tSUBMIT\n\t\t</button>\n\t</div>\n\n\t<div>\n\t\t<div>\n\t\t\t<img *ngIf=\"imageURLForPreloading\"\n\t\t\t[hidden]=\"wasThereAnImageError\"\n\t\t\t(loadstart)=\"isImageLoading = true; wasThereAnImageError = false\"\n\t\t\t(loadend)=\"isImageLoading = false\" (error)=\"wasThereAnImageError = true\"\n\t\t\t[src]=\"imageURLForPreloading\" />\n\t\t</div>\n\t\t<div *ngIf=\"isImageLoading\">\n\t\t\tLoading meme...\n\t\t</div>\n\t\t<div *ngIf=\"wasThereAnImageError\">\n\t\t\tError loading meme\n\t\t</div>\n\t\t<div class=\"caption\">\n\t\t\t{{inputs.controls.memeDescription.value}}\n\t\t</div>\n\t</div>\n</div>\n";
 
 /***/ }),
 /* 800 */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ":host .container {\n  display: flex; }\n"
 
 /***/ })
 ],[793]);
