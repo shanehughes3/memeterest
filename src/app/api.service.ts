@@ -11,33 +11,34 @@ export class ApiService {
 
     public getUserInfo() {
         return this.http.get("/auth/info")
-        .map((res) => {
-            if (!res.ok) {
-                Observable.throw(res);
-            } else {
-                return res;
-            }
-        });
+			.map((res) => {
+				if (!res.ok) {
+					Observable.throw(res);
+				} else {
+					return res;
+				}
+			});
     }
 
     public getAllMemes() {
-
+		return this.http.get("/api/all");
     }
 
-    public getUserMemes() {
-
+    public getUserMemes(userId) {
+		return this.http.get(`/api/${userId}`)
     }
 
-    public saveMeme() {
-
+    public saveMeme(userId, meme) {
+		return this.http.post(`/api/${userId}`, meme);
     }
 
-    public editMeme() {
-
+    public editMeme(userId, memeId, edits) {
+		return this.http.put(`/api/${userId}/${memeId}`,
+			edits);
     }
 
-    public deleteMeme() {
-
+    public deleteMeme(userId, memeId) {
+		return this.http.delete(`/api/${userId}/${memeId}`);
     }
 
 }

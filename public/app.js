@@ -59904,14 +59904,19 @@ var ApiService = (function () {
         });
     };
     ApiService.prototype.getAllMemes = function () {
+        return this.http.get("/api/all");
     };
-    ApiService.prototype.getUserMemes = function () {
+    ApiService.prototype.getUserMemes = function (userId) {
+        return this.http.get("/api/" + userId);
     };
-    ApiService.prototype.saveMeme = function () {
+    ApiService.prototype.saveMeme = function (userId, meme) {
+        return this.http.post("/api/" + userId, meme);
     };
-    ApiService.prototype.editMeme = function () {
+    ApiService.prototype.editMeme = function (userId, memeId, edits) {
+        return this.http.put("/api/" + userId + "/" + memeId, edits);
     };
-    ApiService.prototype.deleteMeme = function () {
+    ApiService.prototype.deleteMeme = function (userId, memeId) {
+        return this.http.delete("/api/" + userId + "/" + memeId);
     };
     ApiService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
@@ -77385,7 +77390,7 @@ var AppComponent = (function () {
             selector: 'app-root',
             // encapsulation: ViewEncapsulation.None,
             template: __webpack_require__(514),
-            styles: [__webpack_require__(795)]
+            styles: [__webpack_require__(517)]
         }), 
         __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_1__api_service__["a" /* ApiService */]])
     ], AppComponent);
@@ -77430,7 +77435,7 @@ var HeaderComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Component */])({
             selector: "header-component",
             template: __webpack_require__(515),
-            styles: [__webpack_require__(517)]
+            styles: [__webpack_require__(518)]
         }), 
         __metadata('design:paramtypes', [])
     ], HeaderComponent);
@@ -77466,7 +77471,7 @@ var UserDashboardComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Component */])({
             selector: "user-dashboard-component",
             template: __webpack_require__(516),
-            styles: [__webpack_require__(518)]
+            styles: [__webpack_require__(519)]
         }), 
         __metadata('design:paramtypes', [])
     ], UserDashboardComponent);
@@ -77546,16 +77551,21 @@ module.exports = "<div>\n    Hi there, {{user.twitterUsername}}!\n</div>\n";
 /* 517 */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  width: 100%; }\n  :host div {\n    border-bottom: 1px solid black;\n    margin-bottom: 1em; }\n  :host .buttons-container {\n    float: right; }\n    :host .buttons-container span, :host .buttons-container a {\n      cursor: pointer;\n      margin-left: 1em;\n      margin-right: 1em; }\n    :host .buttons-container .selected {\n      font-weight: bold; }\n    :host .buttons-container a {\n      text-decoration: none; }\n"
+module.exports = ":host {\n  font-family: \"Courier New\", monospace; }\n\n:host /deep/ a {\n  color: black; }\n"
 
 /***/ }),
 /* 518 */
 /***/ (function(module, exports) {
 
+module.exports = ":host {\n  width: 100%; }\n  :host div {\n    border-bottom: 1px solid black;\n    margin-bottom: 1em; }\n  :host .buttons-container {\n    float: right; }\n    :host .buttons-container span, :host .buttons-container a {\n      cursor: pointer;\n      margin-left: 1em;\n      margin-right: 1em; }\n    :host .buttons-container .selected {\n      font-weight: bold; }\n    :host .buttons-container a {\n      text-decoration: none; }\n"
+
+/***/ }),
+/* 519 */
+/***/ (function(module, exports) {
+
 module.exports = ""
 
 /***/ }),
-/* 519 */,
 /* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -91397,13 +91407,6 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
 
-
-/***/ }),
-/* 794 */,
-/* 795 */
-/***/ (function(module, exports) {
-
-module.exports = ":host {\n  font-family: \"Courier New\", monospace; }\n\n:host /deep/ a {\n  color: black; }\n"
 
 /***/ })
 ],[793]);
