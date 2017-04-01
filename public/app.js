@@ -77502,7 +77502,7 @@ var HeaderComponent = (function () {
 /* 514 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\n\t<meme-display *ngIf=\"currentPage == 'all'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<meme-display *ngIf=\"currentPage == 'mine'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\t\n\t<add-meme *ngIf=\"currentPage == 'add'\" [user]=\"user\">\n\t</add-meme>\n\n</div>\n";
+module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\n\t<meme-display *ngIf=\"currentPage == 'all'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<meme-display *ngIf=\"currentPage == 'mine'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<add-meme *ngIf=\"currentPage == 'add'\" [user]=\"user\"\n\t\t(memeSubmitted)=\"currentPage = 'mine'\">\n\t</add-meme>\n\n</div>\n";
 
 /***/ }),
 /* 515 */
@@ -91464,6 +91464,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AddMemeComponent = (function () {
     function AddMemeComponent(api) {
         this.api = api;
+        this.memeSubmitted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
         this.URLTest = /^(https?:\/\/)?[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
         this.inputs = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormGroup */]({
             memeURL: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].pattern(this.URLTest)),
@@ -91471,6 +91472,7 @@ var AddMemeComponent = (function () {
         });
         this.isImageLoading = false;
         this.wasThereAnImageError = false;
+        this.wasThereASubmissionError = false;
     }
     AddMemeComponent.prototype.tryToLoadImage = function () {
         if (this.inputs.controls.memeURL.valid) {
@@ -91478,18 +91480,29 @@ var AddMemeComponent = (function () {
         }
     };
     AddMemeComponent.prototype.submit = function () {
+        var _this = this;
+        this.wasThereAnImageError = false;
         this.api.saveMeme(this.user._id, {
             meme: {
                 imageURL: this.inputs.controls.memeURL.value,
                 text: this.inputs.controls.memeDescription.value
             }
         })
-            .subscribe(function (res) { console.log(res); }, function (err) { console.error(err); });
+            .subscribe(function (res) {
+            _this.memeSubmitted.emit();
+        }, function (err) {
+            _this.wasThereASubmissionError = true;
+            console.error(err);
+        });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
         __metadata('design:type', Object)
     ], AddMemeComponent.prototype, "user", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Output */])(), 
+        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */])
+    ], AddMemeComponent.prototype, "memeSubmitted", void 0);
     AddMemeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Component */])({
             selector: "add-meme",

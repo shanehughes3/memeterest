@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ApiService } from "../../app/api.service";
 
@@ -9,6 +9,7 @@ import { ApiService } from "../../app/api.service";
 })
 export class AddMemeComponent {
 	@Input() user: any;
+	@Output() memeSubmitted: EventEmitter<any> = new EventEmitter();
 	URLTest = /^(https?:\/\/)?[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
 	inputs = new FormGroup({
 		memeURL: new FormControl("", Validators.pattern(this.URLTest)),
@@ -17,6 +18,7 @@ export class AddMemeComponent {
 	isImageLoading: boolean = false;
 	imageURLForPreloading: string;
 	wasThereAnImageError: boolean = false;
+	wasThereASubmissionError: boolean = false;
 
     constructor(
 		private api: ApiService
@@ -29,6 +31,7 @@ export class AddMemeComponent {
 	}
 
 	public submit() {
+		this.wasThereAnImageError = false;
 		this.api.saveMeme(this.user._id, {
 			meme: {
 				imageURL: this.inputs.controls.memeURL.value,
@@ -36,8 +39,13 @@ export class AddMemeComponent {
 			}
 		})
 			.subscribe(
-				(res) => { console.log(res); },
-				(err) => { console.error(err); }
+				(res) => {
+					this.memeSubmitted.emit();
+				},
+				(err) => {
+					this.wasThereASubmissionError = true;
+					console.error(err);
+				}
 			);
 	}
 }

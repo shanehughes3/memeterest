@@ -14,8 +14,9 @@
 	<meme-display *ngIf="currentPage == 'mine'" [user]="user"
 		[pageType]="currentPage">
 	</meme-display>
-	
-	<add-meme *ngIf="currentPage == 'add'" [user]="user">
+
+	<add-meme *ngIf="currentPage == 'add'" [user]="user"
+		(memeSubmitted)="currentPage = 'mine'">
 	</add-meme>
 
 </div>
