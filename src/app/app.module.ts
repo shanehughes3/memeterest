@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { UserDashboardComponent } from "../components/user-dashboard/user-dashboard";
+import { AddMemeComponent } from "../components/add-meme/add-meme";
 import { HeaderComponent } from "../components/header/header";
 import { MemeDisplayComponent } from "../components/meme-display/meme-display";
 import { ApiService } from "./api.service";
@@ -12,7 +12,7 @@ import { ApiService } from "./api.service";
 @NgModule({
   declarations: [
     AppComponent,
-	UserDashboardComponent,
+	AddMemeComponent,
 	HeaderComponent,
 	MemeDisplayComponent
   ],

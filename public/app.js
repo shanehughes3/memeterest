@@ -62623,7 +62623,7 @@ webpackEmptyContext.id = 351;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(433);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(287);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(461);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_user_dashboard_user_dashboard__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_add_meme_add_meme__ = __webpack_require__(798);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_header_header__ = __webpack_require__(462);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_meme_display_meme_display__ = __webpack_require__(795);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__api_service__ = __webpack_require__(305);
@@ -62653,7 +62653,7 @@ var AppModule = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__components_user_dashboard_user_dashboard__["a" /* UserDashboardComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__components_add_meme_add_meme__["a" /* AddMemeComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__components_header_header__["a" /* HeaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__components_meme_display_meme_display__["a" /* MemeDisplayComponent */]
             ],
@@ -77447,42 +77447,7 @@ var HeaderComponent = (function () {
 
 
 /***/ }),
-/* 463 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserDashboardComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var UserDashboardComponent = (function () {
-    function UserDashboardComponent() {
-    }
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
-        __metadata('design:type', Object)
-    ], UserDashboardComponent.prototype, "user", void 0);
-    UserDashboardComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Component */])({
-            selector: "user-dashboard-component",
-            template: __webpack_require__(516),
-            styles: [__webpack_require__(519)]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], UserDashboardComponent);
-    return UserDashboardComponent;
-}());
-
-
-/***/ }),
+/* 463 */,
 /* 464 */,
 /* 465 */,
 /* 466 */,
@@ -77536,7 +77501,7 @@ var UserDashboardComponent = (function () {
 /* 514 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\t<meme-display *ngIf=\"currentPage == 'all'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\t<meme-display *ngIf=\"currentPage == 'mine'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\t<div *ngIf=\"currentPage == 'add'\">\n\t\t--- this is the add page ---\n\t</div>\n\n</div>\n";
+module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\n\t<meme-display *ngIf=\"currentPage == 'all'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<meme-display *ngIf=\"currentPage == 'mine'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\t\n\t<add-meme *ngIf=\"currentPage == 'add'\" [user]=\"user\">\n\t</add-meme>\n\n</div>\n";
 
 /***/ }),
 /* 515 */
@@ -77545,12 +77510,7 @@ module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"sele
 module.exports = "<div>\n    <span class=\"site-name\">MEMETEREST</span>\n\t<span class=\"buttons-container\">\n\t\t<a *ngIf=\"!user?.twitterUsername\" href=\"/auth/login\">\n\t\t\tLog in with Twitter\n\t\t</a>\n\t\t<span *ngIf=\"user?.twitterUsername\" (click)=\"selectPage.emit('all')\"\n\t\t\t[ngClass]=\"{'selected': currentPage == 'all'}\">\n\t\t\tAll memes\n\t\t</span>\n\t\t<span *ngIf=\"user?.twitterUsername\" (click)=\"selectPage.emit('mine')\"\n\t\t\t[ngClass]=\"{'selected': currentPage == 'mine'}\">\n\t\t\tMy memes\n\t\t</span>\n\t\t<span *ngIf=\"user?.twitterUsername\" (click)=\"selectPage.emit('add')\"\n\t\t\t[ngClass]=\"{'selected': currentPage == 'add'}\">\n\t\t\tAdd\n\t\t</span>\n\t\t<a *ngIf=\"user?.twitterUsername\" href=\"/logout\">\n\t\t\tLog out\n\t\t</a>\n\t</span>\n</div>\n";
 
 /***/ }),
-/* 516 */
-/***/ (function(module, exports) {
-
-module.exports = "<div>\n    Hi there, {{user.twitterUsername}}!\n</div>\n";
-
-/***/ }),
+/* 516 */,
 /* 517 */
 /***/ (function(module, exports) {
 
@@ -77563,12 +77523,7 @@ module.exports = ":host {\n  font-family: \"Courier New\", monospace; }\n\n:host
 module.exports = ":host {\n  width: 100%; }\n  :host div {\n    border-bottom: 1px solid black;\n    margin-bottom: 1em; }\n  :host .buttons-container {\n    float: right; }\n    :host .buttons-container span, :host .buttons-container a {\n      cursor: pointer;\n      margin-left: 1em;\n      margin-right: 1em; }\n    :host .buttons-container .selected {\n      font-weight: bold; }\n    :host .buttons-container a {\n      text-decoration: none; }\n"
 
 /***/ }),
-/* 519 */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
+/* 519 */,
 /* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -91480,6 +91435,54 @@ module.exports = "<div>\n    \n</div>\n";
 
 /***/ }),
 /* 797 */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+/* 798 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddMemeComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AddMemeComponent = (function () {
+    function AddMemeComponent() {
+    }
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */])(), 
+        __metadata('design:type', Object)
+    ], AddMemeComponent.prototype, "user", void 0);
+    AddMemeComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Component */])({
+            selector: "add-meme",
+            template: __webpack_require__(799),
+            styles: [__webpack_require__(800)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AddMemeComponent);
+    return AddMemeComponent;
+}());
+
+
+/***/ }),
+/* 799 */
+/***/ (function(module, exports) {
+
+module.exports = "<div>\n    Gimme some dank memes.\n\n\t<div>\n\t\t<input [(ngModel)]=\"memeURL\" placeholder=\"Image URL\"/>\n\t</div>\n\n\t<div>\n\t\t<input [(ngModel)]=\"memeDescription\" placeholder=\"Caption\"/>\n\t</div>\n\n\t<button (click)=\"submit\">SUBMIT</button>\n</div>\n";
+
+/***/ }),
+/* 800 */
 /***/ (function(module, exports) {
 
 module.exports = ""
