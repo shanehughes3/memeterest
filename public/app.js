@@ -91479,8 +91479,10 @@ var AddMemeComponent = (function () {
     };
     AddMemeComponent.prototype.submit = function () {
         this.api.saveMeme(this.user._id, {
-            imageURL: this.inputs.controls.memeURL.value,
-            text: this.inputs.controls.memeDescription.value
+            meme: {
+                imageURL: this.inputs.controls.memeURL.value,
+                text: this.inputs.controls.memeDescription.value
+            }
         })
             .subscribe(function (res) { console.log(res); }, function (err) { console.error(err); });
     };

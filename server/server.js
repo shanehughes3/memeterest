@@ -19,7 +19,7 @@ app.use(session({
 	secret: config.sessionSecret,
 	cookie: {
 		secure: false,
-		maxAge: 360 * 5
+		maxAge: null
 	}
 }));
 

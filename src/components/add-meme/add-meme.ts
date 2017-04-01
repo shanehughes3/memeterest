@@ -30,8 +30,10 @@ export class AddMemeComponent {
 
 	public submit() {
 		this.api.saveMeme(this.user._id, {
-			imageURL: this.inputs.controls.memeURL.value,
-			text: this.inputs.controls.memeDescription.value
+			meme: {
+				imageURL: this.inputs.controls.memeURL.value,
+				text: this.inputs.controls.memeDescription.value
+			}
 		})
 			.subscribe(
 				(res) => { console.log(res); },
