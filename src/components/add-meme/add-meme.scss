@@ -1,8 +1,32 @@
 :host {
 	.container {
 		display: flex;
-		div {
-			
+		flex-wrap: wrap;
+		.form-container {
+			min-width: 300px;
+			input {
+				background-color: #fff;
+				font-family: inherit;
+				font-size: inherit;
+				border-radius: 0px;
+				margin: 1em;
+			}
+			button {
+				background-color: #fff;
+				border-radius: 0px;
+				margin: 1em;
+				border: 1px solid #000;
+				font-size: inherit;
+			}
+		}
+		.image-container {
+			img {
+				max-width: 300px;
+				max-height: 300px;
+			}
+			.hidden-image {
+				opacity: 0;
+			}
 		}
 	}
 

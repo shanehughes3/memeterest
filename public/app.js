@@ -77505,7 +77505,7 @@ var HeaderComponent = (function () {
 /* 514 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\n\t<meme-display *ngIf=\"currentPage == 'all'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<meme-display *ngIf=\"currentPage == 'mine'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<add-meme *ngIf=\"currentPage == 'add'\" [user]=\"user\"\n\t\t(memeSubmitted)=\"currentPage = 'mine'\">\n\t</add-meme>\n\n</div>\n";
+module.exports = "<div class=\"container\">\n\t<header-component [user]=\"user\" (selectPage)=\"selectPage($event)\"\n\t\t[currentPage]=\"currentPage\">\n\t</header-component>\n\n    <div *ngIf=\"loading\">\n        Checking login...\n    </div>\n\n\t<meme-display *ngIf=\"currentPage == 'all'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<meme-display *ngIf=\"currentPage == 'mine'\" [user]=\"user\"\n\t\t[pageType]=\"currentPage\">\n\t</meme-display>\n\n\t<add-meme *ngIf=\"currentPage == 'add'\" [user]=\"user\"\n\t\t(memeSubmitted)=\"currentPage = 'mine'\">\n\t</add-meme>\n\n</div>\n";
 
 /***/ }),
 /* 515 */
@@ -77518,7 +77518,7 @@ module.exports = "<div>\n    <span class=\"site-name\">MEMETEREST</span>\n\t<spa
 /* 517 */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  font-family: \"Courier New\", monospace; }\n\n:host /deep/ a {\n  color: black; }\n"
+module.exports = ":host {\n  font-family: \"Courier New\", monospace; }\n  :host .container {\n    max-width: 800px;\n    margin: 0 auto; }\n\n:host /deep/ a {\n  color: black; }\n"
 
 /***/ }),
 /* 518 */
@@ -91492,8 +91492,12 @@ var AddMemeComponent = (function () {
         this.wasThereASubmissionError = false;
     }
     AddMemeComponent.prototype.tryToLoadImage = function () {
+        var _this = this;
         if (this.inputs.controls.memeURL.valid) {
-            this.imageURLForPreloading = this.inputs.controls.memeURL.value;
+            this.imageURLForPreloading = "";
+            setTimeout(function () {
+                _this.imageURLForPreloading = _this.inputs.controls.memeURL.value;
+            }, 10);
         }
     };
     AddMemeComponent.prototype.submit = function () {
@@ -91536,13 +91540,13 @@ var AddMemeComponent = (function () {
 /* 799 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\t<div [formGroup]=\"inputs\">\n\t\tGimme some dank memes.\n\t\t<div>\n\t\t\t<input formControlName=\"memeURL\" placeholder=\"Image URL\"\n\t\t\t\t(blur)=\"tryToLoadImage()\"/>\n\t\t</div>\n\n\t\t<div>\n\t\t\t<input formControlName=\"memeDescription\" placeholder=\"Caption\"/>\n\t\t</div>\n\n\t\t<button (click)=\"submit()\" type=\"submit\" [disabled]=\"wasThereAnImageError ||\n\t\t\t!inputs.controls.memeURL.valid\">\n\t\t\tSUBMIT\n\t\t</button>\n\t</div>\n\n\t<div>\n\t\t<div>\n\t\t\t<img *ngIf=\"imageURLForPreloading\"\n\t\t\t[hidden]=\"wasThereAnImageError\"\n\t\t\t(loadstart)=\"isImageLoading = true; wasThereAnImageError = false\"\n\t\t\t(loadend)=\"isImageLoading = false\" (error)=\"wasThereAnImageError = true\"\n\t\t\t[src]=\"imageURLForPreloading\" />\n\t\t</div>\n\t\t<div *ngIf=\"isImageLoading\">\n\t\t\tLoading meme...\n\t\t</div>\n\t\t<div *ngIf=\"wasThereAnImageError\">\n\t\t\tError loading meme\n\t\t</div>\n\t\t<div class=\"caption\">\n\t\t\t{{inputs.controls.memeDescription.value}}\n\t\t</div>\n\t</div>\n</div>\n";
+module.exports = "<div class=\"container\">\n\t<div [formGroup]=\"inputs\" class=\"form-container\">\n\t\tGimme some dank memes.\n\t\t<div>\n\t\t\t<input formControlName=\"memeURL\" placeholder=\"Image URL\"\n\t\t\t\t(blur)=\"tryToLoadImage()\"/>\n\t\t</div>\n\n\t\t<div>\n\t\t\t<input formControlName=\"memeDescription\" placeholder=\"Caption\"/>\n\t\t</div>\n\n\t\t<button (click)=\"submit()\" type=\"submit\" [disabled]=\"wasThereAnImageError ||\n\t\t\t!inputs.controls.memeURL.valid\">\n\t\t\tSUBMIT\n\t\t</button>\n\t</div>\n\n\t<div class=\"image-container\">\n\t\t<div>\n\t\t\t<img *ngIf=\"imageURLForPreloading\"\n\t\t\t[hidden]=\"wasThereAnImageError\"\n\t\t\t(loadstart)=\"isImageLoading = true; wasThereAnImageError = false\"\n\t\t\t(loadend)=\"isImageLoading = false\" (error)=\"wasThereAnImageError = true\"\n\t\t\t[src]=\"imageURLForPreloading\" />\n\t\t</div>\n\t\t<div *ngIf=\"isImageLoading\">\n\t\t\tLoading meme...\n\t\t</div>\n\t\t<div *ngIf=\"wasThereAnImageError\">\n\t\t\tError loading meme\n\t\t</div>\n\t\t<div class=\"caption\">\n\t\t\t{{inputs.controls.memeDescription.value}}\n\t\t</div>\n\t</div>\n</div>\n";
 
 /***/ }),
 /* 800 */
 /***/ (function(module, exports) {
 
-module.exports = ":host .container {\n  display: flex; }\n"
+module.exports = ":host .container {\n  display: flex;\n  flex-wrap: wrap; }\n  :host .container .form-container {\n    min-width: 300px; }\n    :host .container .form-container input {\n      background-color: #fff;\n      font-family: inherit;\n      font-size: inherit;\n      border-radius: 0px;\n      margin: 1em; }\n    :host .container .form-container button {\n      background-color: #fff;\n      border-radius: 0px;\n      margin: 1em;\n      border: 1px solid #000;\n      font-size: inherit; }\n  :host .container .image-container img {\n    max-width: 300px;\n    max-height: 300px; }\n  :host .container .image-container .hidden-image {\n    opacity: 0; }\n"
 
 /***/ })
 ],[793]);

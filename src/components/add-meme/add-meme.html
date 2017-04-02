@@ -1,5 +1,5 @@
 <div class="container">
-	<div [formGroup]="inputs">
+	<div [formGroup]="inputs" class="form-container">
 		Gimme some dank memes.
 		<div>
 			<input formControlName="memeURL" placeholder="Image URL"
@@ -16,7 +16,7 @@
 		</button>
 	</div>
 
-	<div>
+	<div class="image-container">
 		<div>
 			<img *ngIf="imageURLForPreloading"
 			[hidden]="wasThereAnImageError"

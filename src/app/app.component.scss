@@ -1,5 +1,9 @@
 :host {
 	font-family: "Courier New", monospace;
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
 }
 :host /deep/ a {
 	color: black;

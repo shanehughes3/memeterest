@@ -26,7 +26,10 @@ export class AddMemeComponent {
 
 	public tryToLoadImage() {
 		if (this.inputs.controls.memeURL.valid) {
-			this.imageURLForPreloading = this.inputs.controls.memeURL.value;
+			this.imageURLForPreloading = "";
+			setTimeout(() => {
+				this.imageURLForPreloading = this.inputs.controls.memeURL.value;
+			}, 10);
 		}
 	}
 
