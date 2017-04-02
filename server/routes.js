@@ -84,6 +84,17 @@ router.post("/api/:userId", (req, res) => {
 	})
 });
 
+router.put("/api/:userId/:memeId/dank", (req, res) => {
+	db.likeMeme(req.params.memeId, (err, meme) => {
+		if (err) {
+			console.error(err);
+			res.sendStatus(500);
+		} else {
+			res.json({ meme: meme });
+		}
+	});
+});
+
 router.put("/api/:userId/:memeId", (req, res) => {
 	if (req.user._id != req.params.userId) {
 		res.sendStatus(401);

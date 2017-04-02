@@ -149,3 +149,18 @@ exports.deleteUser = function(id, cb) {
          cb(err, memes);
      });
  };
+
+ exports.likeMeme = function(memeId, cb) {
+	 Meme.findById(memeId, (err, meme) => {
+		if (err) {
+			cb(err);
+		} else if (!meme) {
+			cb(new Error("No meme found"));
+		} else {
+			meme.likes++;
+			meme.save((err) => {
+				cb(err, meme)
+			});
+		}
+	 });
+ };

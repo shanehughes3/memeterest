@@ -11,7 +11,8 @@
 		<div class="info-container">
 			<div>
 				<img src="http://i.imgur.com/maStk86.png"
-					class="troll-face" (click)="thisMemeIsDank(meme)"/>
+					class="troll-face" (click)="thisMemeIsDank(meme)"
+					title="{{meme.likes}} {{meme.likes == 1 ? 'person' : 'people'}} think this meme is dank"/>
 					x{{meme.likes}}
 			</div>
 		</div>

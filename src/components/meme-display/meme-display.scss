@@ -1,6 +1,7 @@
 :host {
 	.container {
 		display: flex;
+		flex-wrap: wrap;
 		.meme {
 			position: relative;
 			border: 1px solid black;

@@ -50,6 +50,12 @@ export class MemeDisplayComponent {
 	}
 
 	public thisMemeIsDank(meme) {
-		
+		if (meme._id != this.user._id) {
+			this.api.dankMeme(meme.userId, meme._id)
+				.subscribe(
+					(res) => { meme.likes++; },
+					(err) => { console.error(err); }
+				);
+		}
 	}
 }

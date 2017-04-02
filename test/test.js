@@ -124,6 +124,19 @@ describe("API", function() {
             });
         });
 
+		it("should increase a meme's dankness", function(done) {
+			db.likeMeme(memeId, (err, meme) => {
+				if (err) { done(err); }
+				else {
+					should.exist(meme);
+					meme.should.have.property("_id");
+					meme._id.toString().should.equal(memeId);
+					meme.should.have.property("likes", 1);
+					done();
+				}
+			});
+		});
+
         it("should delete user meme", function(done) {
             db.deleteMeme(userId, memeId, (err, deletedMeme) => {
                 if (err) { done(err); }

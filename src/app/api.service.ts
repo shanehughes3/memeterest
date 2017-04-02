@@ -41,4 +41,7 @@ export class ApiService {
 		return this.http.delete(`/api/${userId}/${memeId}`);
     }
 
+	public dankMeme(userId, memeId) {
+		return this.http.put(`/api/${userId}/${memeId}/dank`, {});
+	}
 }
