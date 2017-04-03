@@ -4,7 +4,7 @@
 			(click)="deleteMeme(meme)">
 			&times;
 		</div>
-		<img [src]="meme.imageURL" class="meme-image"/>
+		<img [src]="meme.imageURL" class="meme-image" onError="this.src='http://i.imgur.com/maStk86.png'"/>
 		<div>
 			{{meme.text}}
 		</div>

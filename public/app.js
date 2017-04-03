@@ -77518,7 +77518,7 @@ module.exports = "<div>\n    <span class=\"site-name\">MEMETEREST</span>\n\t<spa
 /* 517 */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  font-family: \"Courier New\", monospace; }\n  :host .container {\n    max-width: 800px;\n    margin: 0 auto; }\n\n:host /deep/ a {\n  color: black; }\n"
+module.exports = ":host {\n  font-family: \"Courier New\", monospace; }\n  :host .container {\n    max-width: 850px;\n    margin: 0 auto; }\n\n:host /deep/ a {\n  color: black; }\n"
 
 /***/ }),
 /* 518 */
@@ -91449,7 +91449,7 @@ var MemeDisplayComponent = (function () {
 /* 796 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div *ngFor=\"let meme of memes\" class=\"meme\">\n\t\t<div *ngIf=\"pageType == 'mine'\" class=\"delete-button\"\n\t\t\t(click)=\"deleteMeme(meme)\">\n\t\t\t&times;\n\t\t</div>\n\t\t<img [src]=\"meme.imageURL\" class=\"meme-image\"/>\n\t\t<div>\n\t\t\t{{meme.text}}\n\t\t</div>\n\t\t<div class=\"info-container\">\n\t\t\t<div>\n\t\t\t\t<img src=\"http://i.imgur.com/maStk86.png\"\n\t\t\t\t\tclass=\"troll-face\" (click)=\"thisMemeIsDank(meme)\"\n\t\t\t\t\ttitle=\"{{meme.likes}} {{meme.likes == 1 ? 'person' : 'people'}} think this meme is dank\"/>\n\t\t\t\t\tx{{meme.likes}}\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n";
+module.exports = "<div class=\"container\">\n    <div *ngFor=\"let meme of memes\" class=\"meme\">\n\t\t<div *ngIf=\"pageType == 'mine'\" class=\"delete-button\"\n\t\t\t(click)=\"deleteMeme(meme)\">\n\t\t\t&times;\n\t\t</div>\n\t\t<img [src]=\"meme.imageURL\" class=\"meme-image\" onError=\"this.src='http://i.imgur.com/maStk86.png'\"/>\n\t\t<div>\n\t\t\t{{meme.text}}\n\t\t</div>\n\t\t<div class=\"info-container\">\n\t\t\t<div>\n\t\t\t\t<img src=\"http://i.imgur.com/maStk86.png\"\n\t\t\t\t\tclass=\"troll-face\" (click)=\"thisMemeIsDank(meme)\"\n\t\t\t\t\ttitle=\"{{meme.likes}} {{meme.likes == 1 ? 'person' : 'people'}} think this meme is dank\"/>\n\t\t\t\t\tx{{meme.likes}}\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n";
 
 /***/ }),
 /* 797 */

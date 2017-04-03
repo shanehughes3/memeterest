@@ -40,7 +40,7 @@ passport.deserializeUser((obj, cb) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/../public"));
 app.use(routes);
 
 app.listen(config.port);
